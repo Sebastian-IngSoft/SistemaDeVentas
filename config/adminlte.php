@@ -327,22 +327,22 @@ return [
         ['header' => 'Operaciones'],
         [
             'text' => 'Productos',
-            'url' => 'admin/settings',
+            'url' => 'product/index',
             'icon' => 'fas fa-boxes',
         ],
         [
             'text' => 'Ventas',
-            'url' => 'admin/settings',
+            'url' => 'sell/index',
             'icon' => 'far fa-money-bill-alt',
         ],
         [
             'text' => 'Clientes',
-            'url' => 'admin/settings',
+            'url' => 'customer/index',
             'icon' => 'fas fa-user-tag',
         ],
         [
             'text' => 'Caja',
-            'url' => 'admin/settings',
+            'url' => 'wallet/index',
             'icon' => 'fas fa-wallet',
         ],
         /*
