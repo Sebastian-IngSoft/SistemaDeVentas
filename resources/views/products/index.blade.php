@@ -1,13 +1,12 @@
 @extends('adminlte::page')
 
-@section('title', 'Sell-SarSoft')
+@section('title', 'Productos')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Productos</h1>
 @stop
 
 @section('content')
-    <p>Welcome to this  admin panel.</p>
 @stop
 
 @section('css')

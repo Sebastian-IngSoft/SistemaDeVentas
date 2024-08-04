@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Sell-SarSoft',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Sell</b>SarSoft',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -297,7 +297,7 @@ return [
         // Navbar items:
         [
             'type' => 'navbar-search',
-            'text' => 'search',
+            'text' => 'Buscar',
             'topnav_right' => true,
         ],
         [
@@ -308,13 +308,14 @@ return [
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Buscar',
         ],
         [
             'text' => 'blog',
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
+        /*
         [
             'text' => 'pages',
             'url' => 'admin/pages',
@@ -322,17 +323,35 @@ return [
             'label' => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        */
+        ['header' => 'Operaciones'],
         [
-            'text' => 'profile',
+            'text' => 'Productos',
             'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-boxes',
         ],
+        [
+            'text' => 'Ventas',
+            'url' => 'admin/settings',
+            'icon' => 'far fa-money-bill-alt',
+        ],
+        [
+            'text' => 'Clientes',
+            'url' => 'admin/settings',
+            'icon' => 'fas fa-user-tag',
+        ],
+        [
+            'text' => 'Caja',
+            'url' => 'admin/settings',
+            'icon' => 'fas fa-wallet',
+        ],
+        /*
         [
             'text' => 'change_password',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
+        
         [
             'text' => 'multilevel',
             'icon' => 'fas fa-fw fa-share',
@@ -371,6 +390,7 @@ return [
                 ],
             ],
         ],
+        
         ['header' => 'labels'],
         [
             'text' => 'important',
@@ -387,6 +407,7 @@ return [
             'icon_color' => 'cyan',
             'url' => '#',
         ],
+        */
     ],
 
     /*
