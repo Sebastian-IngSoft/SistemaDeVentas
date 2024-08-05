@@ -3,7 +3,7 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SellController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\WalletController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,8 +27,8 @@ Route::controller(ProductController::class)->group(function(){
 });
 
 //ventas
-Route::controller(SellController::class)->group(function(){
-    Route::get('/sell/index','index')->name('sell.index');
+Route::controller(SaleController::class)->group(function(){
+    Route::get('/sale/index','index')->name('sale.index');
 });
 
 //Clientes

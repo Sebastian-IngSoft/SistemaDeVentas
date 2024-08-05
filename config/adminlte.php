@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Sell-SarSoft',
+    'title' => 'Sales-SarSoft',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Sell</b>SarSoft',
+    'logo' => '<b>Sales</b>SarSoft',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -331,21 +331,34 @@ return [
             'icon' => 'fas fa-boxes',
         ],
         [
-            'text' => 'Ventas',
-            'url' => 'sell/index',
-            'icon' => 'far fa-money-bill-alt',
-        ],
-        [
             'text' => 'Clientes',
             'url' => 'customer/index',
             'icon' => 'fas fa-user-tag',
+        ],
+        [
+            'text' => 'Ventas',
+            'icon' => 'far fa-money-bill-alt',
+            'submenu' => [
+                [
+                    'text' => 'Hacer venta',
+                    'url' => '#',
+                ],
+                [
+                    'text' => 'Ventas diarias',
+                    'url' => '#',
+                ],
+                [
+                    'text' => 'Boletas',
+                    'url' => '#',
+                ],
+            ],
         ],
         [
             'text' => 'Caja',
             'url' => 'wallet/index',
             'icon' => 'fas fa-wallet',
         ],
-        /*
+        
         [
             'text' => 'change_password',
             'url' => 'admin/settings',
@@ -390,7 +403,7 @@ return [
                 ],
             ],
         ],
-        
+        /*
         ['header' => 'labels'],
         [
             'text' => 'important',
