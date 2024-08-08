@@ -21,36 +21,35 @@
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo Cliente</h1>
                 </div>
                 <div class="modal-body">
-                    <form action="">
+                    <form action="{{route('customer.store')}}" method="POST">
+                        @csrf
+                        <label>Nombre</label>
+                        <input type="text" name="name" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" required>
 
-                        <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default">
+                        <label>DNI</label>
+                        <input type="number" name="dni" step="any" class="form-control" onkeypress="validarNumero(event)"
+                            oninput="validarNumeroOnInput(this)" required>
 
-                        <label for="descripcion">DNI</label>
-                        <input type="number" step="any" class="form-control" onkeypress="validarNumero(event)"
-                            oninput="validarNumeroOnInput(this)">
+                        <label>Telefono</label>
+                        <input type="number" name="number" step="any" class="form-control" onkeypress="validarNumero(event)"
+                            oninput="validarNumeroOnInput(this)" required>
 
-                        <label for="stock_inicial">Telefono</label>
-                        <input type="number" step="any" class="form-control" onkeypress="validarNumero(event)"
-                            oninput="validarNumeroOnInput(this)">
-
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Guardar</button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
                 </div>
             </div>
         </div>
     </div>
 
 
+
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">DNI</th>
                 <th scope="col">Telefono</th>
@@ -58,13 +57,58 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-            </tr>
+            @foreach ($customers as $item_customers)
+                <tr>
+                    <td>{{ $item_customers->name }}</td>
+                    <td>{{ $item_customers->dni }}</td>
+                    <td>{{ $item_customers->number }}</td>
+                    <td>
+                        <button type="button" class="btn btn-warning mb-3" data-bs-toggle="modal"
+                            data-bs-target="#ModalEditar{{ $item_customers->id }}">
+                            <i class="fas fa-pen-nib"></i>
+                        </button>
+                    </td>
+                </tr>
+
+                <!-- Modal editar-->
+                <div class="modal fade" id="ModalEditar{{ $item_customers->id }}" data-bs-backdrop="static"
+                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Cliente </h1>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('customer.update', $item_customers->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" name="name" class="form-control"
+                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+                                        value="{{ $item_customers->name }}" required>
+
+                                    <label for="">DNI</label>
+                                    <input type="number" name="dni" class="form-control"
+                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+                                        onkeypress="validarNumero(event)" oninput="validarNumeroOnInput(this)"
+                                        value="{{ $item_customers->dni }}" required>
+
+                                    <label for="">Telefono</label>
+                                    <input type="number" name="number" step="any" class="form-control"
+                                        onkeypress="validarNumero(event)" oninput="validarNumeroOnInput(this)"
+                                        value="{{ $item_customers->number }}" required>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Editar</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            @endforeach
         </tbody>
     </table>
 

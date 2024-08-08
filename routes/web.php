@@ -23,26 +23,29 @@ Route::middleware('auth')->group(function () {
 
 //PRODUCTOS
 Route::controller(ProductController::class)->group(function(){
-    Route::get('/product/index','index')->name('product.index');
-    Route::post('/product/store','store')->name('product.store');
-    Route::put('/product/update/{product}','update')->name('product.update');
-    Route::put('/product/visibility/{product}','visibility')->name('product.visibility');
-});
-
-//ventas
-Route::controller(SaleController::class)->group(function(){
-    Route::get('/sale/index','index')->name('sale.index');
+    Route::get('/product/index','index')->name('product.index')->middleware(['auth', 'verified']);
+    Route::post('/product/store','store')->name('product.store')->middleware(['auth', 'verified']);
+    Route::put('/product/update/{product}','update')->name('product.update')->middleware(['auth', 'verified']);
+    Route::put('/product/visibility/{product}','visibility')->name('product.visibility')->middleware(['auth', 'verified']);
 });
 
 //Clientes
 Route::controller(CustomerController::class)->group(function(){
-    Route::get('/customer/index','index')->name('customer.index');
-});
+    Route::get('/customer/index','index')->name('customer.index')->middleware(['auth', 'verified']);
+    Route::post('/costumer/store','store')->name('customer.store')->middleware(['auth', 'verified']);
+    Route::put('/costumer/update/{customer}','update')->name('customer.update')->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified']);
+
+//ventas
+Route::controller(SaleController::class)->group(function(){
+    Route::get('/sale/index','index')->name('sale.index')->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified']);
+
 
 //Caja
 Route::controller(WalletController::class)->group(function(){
     Route::get('/wallet/index','index')->name('wallet.index');
-});
+})->middleware(['auth', 'verified']);
 
 
 
