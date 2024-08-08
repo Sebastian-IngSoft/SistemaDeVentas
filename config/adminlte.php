@@ -341,7 +341,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Hacer venta',
-                    'url' => '#',
+                    'url' => '/sale/index',
                 ],
                 [
                     'text' => 'Ventas diarias',
