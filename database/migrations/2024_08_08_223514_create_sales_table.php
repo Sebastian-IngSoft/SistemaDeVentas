@@ -14,14 +14,8 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->integer('amount');
-            
-            // Definir las claves foráneas directamente
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
-            $table->foreignId('product_id')->nullable()->constrained('products')->onDelete('set null');
-            $table->foreignId('customer_id')->nullable()->constrained('customers')->onDelete('set null');
             $table->foreignId('ticket_id')->constrained('tickets');
-            
-            
+            $table->foreignId('product_id')->nullable()->constrained('products')->onDelete('set null');
             $table->timestamps();
         });
     }

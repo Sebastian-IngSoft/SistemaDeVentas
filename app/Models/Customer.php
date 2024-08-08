@@ -12,8 +12,8 @@ class Customer extends Model
     protected $fillable = ['name','dni','number'];
     
     //relaciones
-    public function sales()
+    public function tickets()
     {
-        return $this->hasMany(Sale::class);
+        return $this->hasMany(Ticket::class);
     }
 }

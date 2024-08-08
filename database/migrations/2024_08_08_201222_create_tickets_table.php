@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->float('pay');
-            $table->tinyInteger('cancel');
+            $table->double('price',2);
+            
+            //relaciones
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('customer_id')->nullable()->constrained('customers')->onDelete('set null');
+
             $table->timestamps();
         });
     }
