@@ -33,6 +33,7 @@
 
                         <label for="stock_inicial">Stock Inicial</label>
                         <input type="number" name="stock" class="form-control" aria-label="Sizing example input"
+                            onkeypress="validarNumero(event)" oninput="validarNumeroOnInput(this)"
                             aria-describedby="inputGroup-sizing-default" required>
 
                         <label for="">Precio de Compra</label>
@@ -79,7 +80,7 @@
                             <i class="fas fa-pen-nib"></i>
                         </button>
                         <button type="button" class="btn btn-danger mb-3" data-bs-toggle="modal"
-                            data-bs-target="#ModalEliminar{{$item_products->id}}">
+                            data-bs-target="#ModalEliminar{{ $item_products->id }}">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>
@@ -110,6 +111,7 @@
                                     <label for="stock_inicial">Stock Inicial</label>
                                     <input type="number" name="stock" class="form-control"
                                         aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+                                        onkeypress="validarNumero(event)" oninput="validarNumeroOnInput(this)"
                                         value="{{ $item_products->stock }}" required>
 
                                     <label for="">Precio de Compra</label>
@@ -133,23 +135,24 @@
                 </div>
 
                 <!-- Modal Eliminar -->
-                <div class="modal fade" id="ModalEliminar{{$item_products->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
+                <div class="modal fade" id="ModalEliminar{{ $item_products->id }}" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Producto {{$item_products->name}}</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Producto
+                                    {{ $item_products->name }}</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                ¿Seguro que desea eliminar el producto {{$item_products->name}}?
+                                ¿Seguro que desea eliminar el producto {{ $item_products->name }}?
                                 <br>
                                 El producto no se podra volver a visualizar.
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <form action="{{route('product.visibility',$item_products->id)}}" method="POST">
+                                <form action="{{ route('product.visibility', $item_products->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <button type="submit" class="btn btn-danger">Eliminar producto</button>
