@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('stock');
             $table->double('purchase',2);
             $table->double('sell',2);
+            $table->tinyInteger('visibility')->default(1);
             $table->timestamps();
         });
     }

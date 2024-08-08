@@ -24,6 +24,9 @@ Route::middleware('auth')->group(function () {
 //PRODUCTOS
 Route::controller(ProductController::class)->group(function(){
     Route::get('/product/index','index')->name('product.index');
+    Route::post('/product/store','store')->name('product.store');
+    Route::put('/product/update/{product}','update')->name('product.update');
+    Route::put('/product/visibility/{product}','visibility')->name('product.visibility');
 });
 
 //ventas
