@@ -13,8 +13,8 @@ class Ticket extends Model
 
     protected $fillable = ['user_id', 'customer_id' , 'price'];
 
-    //creando las ventas relacionadas con el ticket
-    public function salesStore(Request $request){
+    //creando las ventas relacionadas con el ticket 1x1
+    public function salesStore(Request $request){ 
         $sale = new Sale;
         for ($i=0; $i < count($request->products)  ; $i++) { 
             $sale->create([

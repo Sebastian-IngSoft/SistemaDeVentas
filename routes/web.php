@@ -41,6 +41,8 @@ Route::controller(CustomerController::class)->group(function(){
 Route::controller(TicketController::class)->group(function(){
     Route::get('/ticket/index','index')->name('ticket.index')->middleware(['auth', 'verified']);
     Route::post('/ticket/store','store')->name('ticket.store')->middleware(['auth', 'verified']);
+    Route::get('/ticket/showtickets','showtickets')->name('ticket.showtickets')->middleware(['auth','verified']);
+    Route::get('/ticket/show/{ticket}','show')->name('ticket.show')->middleware(['auth','verified']);
 });
 
 
