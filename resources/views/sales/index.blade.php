@@ -14,15 +14,13 @@
                     Cliente:
                 </label>
                 <div class="input-group mb-3">
-                    <select class="form-select w-100" id="customerSelect">
+                    <select class="form-control w-100" id="customerSelect">
                         <option selected>Casual</option>
-                        {{--!
                         
                         @foreach ($customers as $customer)
                             <option value="{{ $customer->id }}">{{ $customer->name }}</option>
                         @endforeach
                         
-                        --}}
                     </select>
                 </div>
             </div>
@@ -31,25 +29,23 @@
         <div class="row mt-4">
             <div class="col-12">
                 <h5>Productos en canasta:</h5>
-                <table class="table table-bordered" id="cartTable">
+                <table class="table" id="cartTable">
                     <thead>
                         <tr>
                             <th>Producto</th>
                             <th>Cantidad</th>
                             <th>Precio Total</th>
-                            <th>Acciones</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>
-                                <select class="form-select" name="products[]">
-                                    <option selected disabled>Seleccione un producto</option>
-                                    
+                                <select class="form-control w-100" name="products[]">
+                                    <option selected>Seleccione un producto</option>
                                     @foreach ($products as $product)
-                                        <option value="{{ $product->id }}" data-price="{{ $product->price }}">{{ $product->name }}</option>
+                                        <option value="{{ $product->id}}" data-price="{{ $product->sell }}">{{ $product->name.' S/'.$product->sell }}</option>
                                     @endforeach
-                                    
                                 </select>
                             </td>
                             <td>
@@ -58,13 +54,18 @@
                             <td class="product-total">
                                 0.00
                             </td>
-                            <td>
-                                <button type="button" class="btn btn-danger remove-row">Eliminar</button>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-danger remove-row">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <button type="button" class="btn btn-primary" id="addRowBtn">Agregar Producto</button>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-primary" id="addRowBtn">Agregar Producto</button>
+                    <h5>Total: <span id="grandTotal">0.00</span></h5>
+                </div>
             </div>
         </div>
     </div>
@@ -77,37 +78,70 @@
 @stop
 
 @section('js')
+    @vite(['resources/js/app.js', 'resources/js/bootstrap.bundle.min.js'])
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const cartTable = document.getElementById('cartTable');
             const addRowBtn = document.getElementById('addRowBtn');
+            const grandTotalElement = document.getElementById('grandTotal');
 
-            addRowBtn.addEventListener('click', function () {
-                const newRow = cartTable.querySelector('tbody tr').cloneNode(true);
-                newRow.querySelectorAll('input').forEach(input => input.value = 1);
-                newRow.querySelector('.product-total').textContent = '0.00';
-                cartTable.querySelector('tbody').appendChild(newRow);
-            });
+            function updateGrandTotal() {
+                let grandTotal = 0;
+                cartTable.querySelectorAll('tbody tr').forEach(row => {
+                    const totalCell = row.querySelector('.product-total').textContent;
+                    grandTotal += parseFloat(totalCell) || 0;
+                });
+                grandTotalElement.textContent = grandTotal.toFixed(2);
+            }
 
-            cartTable.addEventListener('click', function (event) {
-                if (event.target.classList.contains('remove-row')) {
+            function resetRow(row) {
+                row.querySelector('select[name="products[]"]').value = "";
+                row.querySelector('input[name="quantities[]"]').value = 1;
+                row.querySelector('.product-total').textContent = '0.00';
+            }
+
+            function addEventListeners(row) {
+                row.querySelector('button.remove-row').addEventListener('click', function () {
                     const rows = cartTable.querySelectorAll('tbody tr');
                     if (rows.length > 1) {
-                        event.target.closest('tr').remove();
+                        row.remove();
+                        updateGrandTotal();
                     }
-                }
-            });
+                });
 
-            cartTable.addEventListener('change', function (event) {
-                if (event.target.name === 'products[]' || event.target.name === 'quantities[]') {
-                    const row = event.target.closest('tr');
+                row.querySelector('select[name="products[]"]').addEventListener('change', function () {
                     const productSelect = row.querySelector('select[name="products[]"]');
                     const quantityInput = row.querySelector('input[name="quantities[]"]');
                     const totalCell = row.querySelector('.product-total');
                     const price = productSelect.options[productSelect.selectedIndex].dataset.price || 0;
                     const quantity = quantityInput.value;
                     totalCell.textContent = (price * quantity).toFixed(2);
-                }
+                    updateGrandTotal();
+                });
+
+                row.querySelector('input[name="quantities[]"]').addEventListener('input', function () {
+                    const productSelect = row.querySelector('select[name="products[]"]');
+                    const quantityInput = row.querySelector('input[name="quantities[]"]');
+                    const totalCell = row.querySelector('.product-total');
+                    const price = productSelect.options[productSelect.selectedIndex].dataset.price || 0;
+                    const quantity = quantityInput.value;
+                    totalCell.textContent = (price * quantity).toFixed(2);
+                    updateGrandTotal();
+                });
+            }
+
+            // Limpiar valores iniciales y establecer eventos
+            cartTable.querySelectorAll('tbody tr').forEach(row => {
+                resetRow(row);
+                addEventListeners(row);
+            });
+
+            addRowBtn.addEventListener('click', function () {
+                const newRow = cartTable.querySelector('tbody tr').cloneNode(true);
+                resetRow(newRow);
+                addEventListeners(newRow);
+                cartTable.querySelector('tbody').appendChild(newRow);
             });
         });
     </script>
