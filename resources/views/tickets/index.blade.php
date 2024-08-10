@@ -18,7 +18,7 @@
                     <div class="input-group mb-3">
                         @csrf
                         <select class="form-control w-100" id="customerSelect" name="customer_id">
-                            <option selected value="">Casual</option>
+                            <option selected value="">Cliente casual</option>
 
                             @foreach ($customers as $customer)
                                 <option value="{{ $customer->id }}">{{ $customer->name }}</option>
