@@ -62,6 +62,12 @@
                 </tr>
             </tbody>
         </table>
+        <div class="row">
+
+            <button class="btn btn-danger w-25 mx-auto">Poner en deuda</button>
+            <button class="btn btn-primary w-25 mx-auto">Registrar pago</button>
+        </div>
+
     </div>
 
 @stop

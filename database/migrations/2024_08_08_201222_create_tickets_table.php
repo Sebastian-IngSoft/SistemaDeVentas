@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->double('price',2);
+            $table->double('discount',2)->nullable();
+            $table->double('total',2)->nullable();
             
             //relaciones
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
