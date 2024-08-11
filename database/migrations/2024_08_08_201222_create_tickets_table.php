@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->double('price',2);
             $table->double('discount',2)->nullable();
-            $table->double('total',2)->nullable();
-            
+            $table->double('total',2)->nullable();            
             //relaciones
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('customer_id')->nullable()->constrained('customers')->onDelete('set null');

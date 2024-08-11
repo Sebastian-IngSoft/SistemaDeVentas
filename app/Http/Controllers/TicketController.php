@@ -13,7 +13,8 @@ class TicketController extends Controller
 {
 
     public function index()
-    {
+    {   
+        // Vista para crear la venta
         $customers = Customer::all();
         $products = Product::where('visibility', 1)->get();
         return view('tickets.index', compact('customers', 'products'));
@@ -44,11 +45,11 @@ class TicketController extends Controller
     }
 
     public function showtickets(){ //muestra todos los tickets
-        $tickets = Ticket::orderby('id','desc')->paginate(10);
+        $tickets = Ticket::orderby('id','desc')->paginate(20);
         return view('tickets.showtickets', compact('tickets'));
     }
 
-    public function show(Ticket $ticket){
+    public function show(Ticket $ticket){//muestra el ticket seleccionado
         $sales = Sale::where('ticket_id',$ticket->id)->get();
         return view('tickets.show',compact('ticket','sales'));
     }
