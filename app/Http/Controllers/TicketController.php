@@ -31,8 +31,13 @@ class TicketController extends Controller
             'price' => $request->price
         ]);
     
-        $ticket->salesStore($request); //crea las ventas en la table sale por productos seleccionados
+        //crea las ventas en la tabla sale por productos seleccionados
+        $sale = new SaleController;
+        $sale->salesStore($request,$ticket->id); //pasa el request para crear 1 x 1 y el ticket para la relacion en la tabla sales
 
+        //hace la reduccion del stock de los productos actualizandolo
+        $product = new ProductController;
+        $product->stockReduction($request);
         return redirect()->route('ticket.show',$ticket);
 
 

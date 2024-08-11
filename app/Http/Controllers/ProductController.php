@@ -29,4 +29,9 @@ class ProductController extends Controller
         return redirect()->route('product.index');
         
     }
+
+    public function stockReduction (Request $request){//hace la reduccion de los productos actualizandolo se creo en el modelo 
+        $product = new Product;
+        $product->stockReduction($request);
+    }
 }
