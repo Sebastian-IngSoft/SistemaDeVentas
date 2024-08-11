@@ -45,7 +45,6 @@
                             <tr>
                                 <td>
                                     <select class="form-control w-100" name="products[]">
-                                        <option selected>Seleccione un producto</option>
                                         @foreach ($products as $product)
                                             <option value="{{ $product->id }}" data-price="{{ $product->sell }}">
                                                 {{ $product->name . ' - S/' . $product->sell . ' - #Stock ' . $product->stock }}</option>
