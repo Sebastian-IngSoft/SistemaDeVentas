@@ -113,7 +113,7 @@
                                         aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
                                         onkeypress="validarNumero(event)" oninput="validarNumeroOnInput(this)"
                                         value="{{ $item_products->stock }}" required>
-
+                                    
                                     <label for="">Precio de Compra</label>
                                     <input type="number" name="purchase" step="any" class="form-control"
                                         onkeypress="validarNumero(event)" oninput="validarNumeroOnInput(this)"

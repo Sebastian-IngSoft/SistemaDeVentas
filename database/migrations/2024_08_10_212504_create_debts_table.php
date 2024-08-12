@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('debts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ticket_id')->constrained('tickets');
+            $table->tinyInteger('cancel')->default(0);
+            $table->foreignId('ticket_id')->unique()->constrained('tickets');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }

@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Debt extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['cancel','ticket_id','user_id'];
+
+    public function ticket(){
+        return $this->belongsTo(Ticket::class);
+    }
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
 }

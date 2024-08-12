@@ -49,4 +49,7 @@ class User extends Authenticatable
     public function tickets(){
         return $this->hasMany(Ticket::class);
     }
+    public function debts(){
+        return $this->hasMany(Debt::class);
+    }
 }

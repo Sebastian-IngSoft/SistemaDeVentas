@@ -11,7 +11,7 @@ class Ticket extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'customer_id' , 'price'];
+    protected $fillable = ['user_id', 'customer_id' , 'price', 'discount', 'total'];
 
     //relaciones
     public function sales()
@@ -25,5 +25,9 @@ class Ticket extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function debt(){
+        return $this->hasOne(Debt::class);
     }
 }

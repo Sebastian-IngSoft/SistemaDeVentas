@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Debt;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\Ticket;
@@ -39,6 +40,11 @@ class TicketController extends Controller
         //hace la reduccion del stock de los productos actualizandolo
         $product = new ProductController;
         $product->stockReduction($request);
+
+        //lo pone en deuda recien creado
+        $debt = new DebtController;
+        $debt->store($ticket);
+
         return redirect()->route('ticket.show',$ticket);
 
 

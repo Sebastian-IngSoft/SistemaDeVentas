@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Customer;
+use App\Models\Debt;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\Ticket;
@@ -30,6 +31,14 @@ class DatabaseSeeder extends Seeder
         Customer::factory(20)->create();
         Ticket::factory(50)->create();
         Sale::factory(50)->create();
+
+        //relacionar los tickets con deudas 
+        $tickets = Ticket::all();
+        foreach ($tickets as $ticket) {
+            Debt::factory()->create([
+                'ticket_id' => $ticket->id,
+            ]);
+        }
         
     }
 }
