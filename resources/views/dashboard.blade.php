@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Sell-SarSoft')
+@section('title', 'Sales-SarSoft')
 
 @section('content_header')
     <h1>Dashboard</h1>

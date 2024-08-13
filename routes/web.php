@@ -51,6 +51,8 @@ Route::controller(TicketController::class)->group(function(){
 //Caja
 Route::controller(WalletController::class)->group(function(){
     Route::get('/wallet/index','index')->name('wallet.index')->middleware(['auth', 'verified']);
+    Route::post('/wallet/deposit','deposit')->name('wallet.deposit')->middleware(['auth', 'verified']);
+    Route::post('/wallet/withdraw','withdraw')->name('wallet.withdraw')->middleware(['auth', 'verified']);
 });
 
 

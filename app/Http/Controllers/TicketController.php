@@ -7,6 +7,7 @@ use App\Models\Debt;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\Ticket;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -67,10 +68,18 @@ class TicketController extends Controller
             'discount' => $request->discount,
             'total' => ($ticket->price - $request->discount),
         ]);
-        $ticket->debt->update([ // actuliza la tabla debt como pagada y registra que vendedor pago la deuda
+        $ticket->debt->update([ // actualiza la tabla debt como pagada y registra que vendedor pago la deuda
             'cancel' => 1,
             'user_id' => Auth::id()
         ]);
+
+        //Actualizar estado de la caja cuando se PAGA una boleta
+        $lastestbalance = Wallet::latest('id')->first();// Busca el ultimo registro de la caja (wallet)
+        $ticket->wallet()->create([ // crea un nuevo registro en en la caja (wallet) como ingreso de dinero
+            'balance' => $lastestbalance->balance + ($ticket->price - $request->discount),
+            'flow' =>   $ticket->price - $request->discount
+        ]);
+
         return redirect()->route('ticket.show', $ticket);
 
     }
