@@ -7,11 +7,34 @@
 @stop
 
 @section('content')
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#Operacion</th>
+            <th scope="col">Saldo</th>
+            <th scope="col">Flujo</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Motivo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($wallets as $wallet)    
+        <tr>
+            <td>{{$wallet->id}}</td>
+            <td>{{$wallet->balance}}</td>
+            <td>{{$wallet->flow}}</td>
+            <td>{{$wallet->created_at}}</td>
+            <td>{{'test'}}</td>
+        </tr>
+        @endforeach
+        
+    </tbody>
+</table>
 @stop
 
 @section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    
 @stop
 
 @section('js')

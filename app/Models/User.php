@@ -52,4 +52,9 @@ class User extends Authenticatable
     public function debts(){
         return $this->hasMany(Debt::class);
     }
+
+    //relacion polimorfica
+    public function wallet(){
+        return $this->morphOne(Wallet::class,'walletable');
+    }
 }

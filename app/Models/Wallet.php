@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Wallet extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    public function walletable(){
+        return $this->morphTo();
+    }
 }

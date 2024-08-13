@@ -30,4 +30,9 @@ class Ticket extends Model
     public function debt(){
         return $this->hasOne(Debt::class);
     }
+
+    //relacion polimorfica
+    public function wallet(){
+        return $this->morphOne(Wallet::class,'walletable');
+    }
 }
