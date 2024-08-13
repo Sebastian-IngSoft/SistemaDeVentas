@@ -29,14 +29,16 @@
                     <td>{{ $ticket->price }}</td>
                     <td class="text-center">
                         <a href="{{ route('ticket.show', $ticket) }}"
-                            class="btn btn-{{ $ticket->debt->cancel == 0 ? 'primary' : 'success' }} d-flex align-items-center justify-content-center"
+                            class="btn btn-{{ $ticket->debt->cancel == 0 ? 'primary' : ($ticket->debt->cancel == 1 ? 'success' : 'danger') }} d-flex align-items-center justify-content-center"
                             style="width: 40px; height: 40px;">
                             @if ($ticket->debt->cancel == 0)
                                 <i class="far fa-eye"></i>
-                            @else
+                            @elseif($ticket->debt->cancel == 1)
                                 <i class="fas fa-dollar-sign"></i>
+                            @elseif($ticket->debt->cancel == 2)
+                                <i class="fas fa-ban"></i>
                             @endif
-                            {{--El boton cambia de icono segun el estado del debt(deuda)--}}
+                            {{-- El boton cambia de icono segun el estado del debt(deuda) --}}
                         </a>
                 </tr>
             @endforeach

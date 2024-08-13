@@ -10,6 +10,7 @@ class Debt extends Model
     use HasFactory;
 
     protected $fillable = ['cancel','ticket_id','user_id'];
+    // atributo cancel = [ 0 = en deuda , 1 = pagada, 2 = anulada]
 
     public function ticket(){
         return $this->belongsTo(Ticket::class);

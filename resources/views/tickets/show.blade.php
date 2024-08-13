@@ -66,15 +66,23 @@
     </div>
 
     @if ($ticket->debt->cancel == 0)
+        {{-- BOLETA EN DEUDA --}}
         <div class="row">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-warning mx-auto w-50 py-3 mt-4"" data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop">
                 Pagar Boleta <i class="fas fa-hand-holding-usd"></i>
-
             </button>
         </div>
-        <!-- Modal -->
+        <div class="row">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger mx-auto w-50 py-3 mt-4"" data-bs-toggle="modal"
+                data-bs-target="#AnularBoleta">
+                Anular Boleta <i class="fas fa-ban"></i>
+            </button>
+        </div>
+
+        <!-- Modal Pagar boleta-->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -115,7 +123,32 @@
                 </div>
             </div>
         </div>
-    @else
+        <!-- Modal Anular boleta-->
+        <div class="modal fade" id="AnularBoleta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Anular Boleta</h1>
+                    </div>
+                    <form action="{{ route('ticket.annular', $ticket) }}" method="POST">
+                        <div class="modal-body">
+                            @csrf
+
+                            <h3>
+                                ¿Seguro que desea anular la boleta?
+                            </h3>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-danger">Anular boleta</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @elseif($ticket->debt->cancel == 1)
+        {{-- BOLETA PAGADA --}}
         <div class="container">
             <table class="table table-bordered">
                 <tbody>
@@ -135,7 +168,7 @@
 
                     <tr>
                         <th colspan="1" class="bg-success">Fecha de pago</th>
-                        <td colspan="5" class="">{{$ticket->updated_at}}</td>
+                        <td colspan="5" class="">{{ $ticket->debt->updated_at }}</td>
                     </tr>
 
                     <tr>
@@ -145,7 +178,36 @@
 
                     <tr>
                         <th colspan="1" class="bg-success">Nombre</th>
-                        <td colspan="5" class="">{{ $debt->user->name}}</td>
+                        <td colspan="5" class="">{{ $debt->user->name }}</td>
+
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    @elseif($ticket->debt->cancel == 2)
+        {{-- BOLETA ANULADA --}}
+
+        <div class="container">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th colspan="6" class="text-center bg-danger">BOLETA ANULADA</th>
+                    </tr>
+
+                    <tr>
+                        <th colspan="1" class="bg-danger">Fecha de anulacion</th>
+                        <td colspan="5" class="">{{ $ticket->debt->updated_at }}</td>
+                    </tr>
+
+                    <tr>
+                        <th colspan="6" class="text-center bg-danger">DATOS DEL ANULADOR</th>
+                    </tr>
+
+
+                    <tr>
+                        <th colspan="1" class="bg-danger">Nombre</th>
+                        <td colspan="5" class="">{{ $debt->user->name }}</td>
 
 
                     </tr>

@@ -21,7 +21,7 @@ class TicketController extends Controller
         return view('tickets.index', compact('customers', 'products'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request)// crea la boleta como deuda
     {
         // Obtener el usuario autenticado
         $userId = Auth::id();
@@ -61,7 +61,8 @@ class TicketController extends Controller
         return view('tickets.show',compact('ticket','sales','debt'));
     }
 
-    public function payment(Request $request, Ticket $ticket){ //actualiza los campos discount y total para completar el ticket
+    public function payment(Request $request, Ticket $ticket){ //funcion para pagar la boleta
+        //actualiza los campos discount y total para completar el ticket
         $ticket->update([
             'discount' => $request->discount,
             'total' => ($ticket->price - $request->discount),
@@ -70,7 +71,18 @@ class TicketController extends Controller
             'cancel' => 1,
             'user_id' => Auth::id()
         ]);
-        return redirect()->route('ticket.showtickets');
+        return redirect()->route('ticket.show', $ticket);
+
+    }
+
+    public function annular(Ticket $ticket){//anular boleta
+        $ticket->debt->update([
+            'cancel' => 2,
+            'user_id' => Auth::id()
+
+        ]);
+        return redirect()->route('ticket.show', $ticket);
+        
 
     }
 }
