@@ -22,16 +22,22 @@
         <tbody>
             @foreach ($tickets as $ticket)
                 <tr>
-                    <th scope="row">{{$ticket->id}}</th>
-                    <td>{{$ticket->user->name}}</td>
+                    <th scope="row">{{ $ticket->id }}</th>
+                    <td>{{ $ticket->user->name }}</td>
                     <td>{{ $ticket->customer->name ?? 'Cliente casual no registrado' }}</td>
-                    <td>{{$ticket->created_at}}</td>
-                    <td>{{$ticket->price}}</td>
-                    <td>
-                        <a href="{{route('ticket.show',$ticket)}}" class="btn btn-primary">
-                            <i class="far fa-eye"></i>
+                    <td>{{ $ticket->created_at }}</td>
+                    <td>{{ $ticket->price }}</td>
+                    <td class="text-center">
+                        <a href="{{ route('ticket.show', $ticket) }}"
+                            class="btn btn-{{ $ticket->debt->cancel == 0 ? 'primary' : 'success' }} d-flex align-items-center justify-content-center"
+                            style="width: 40px; height: 40px;">
+                            @if ($ticket->debt->cancel == 0)
+                                <i class="far fa-eye"></i>
+                            @else
+                                <i class="fas fa-dollar-sign"></i>
+                            @endif
+                            {{--El boton cambia de icono segun el estado del debt(deuda)--}}
                         </a>
-                    </td>
                 </tr>
             @endforeach
         </tbody>

@@ -43,6 +43,7 @@ Route::controller(TicketController::class)->group(function(){
     Route::post('/ticket/store','store')->name('ticket.store')->middleware(['auth', 'verified']);
     Route::get('/ticket/showtickets','showtickets')->name('ticket.showtickets')->middleware(['auth','verified']);
     Route::get('/ticket/show/{ticket}','show')->name('ticket.show')->middleware(['auth','verified']);
+    Route::put('/ticket/payment/{ticket}','payment')->name('ticket.payment')->middleware('auth','verified');
 });
 
 

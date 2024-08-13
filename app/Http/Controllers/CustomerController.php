@@ -9,7 +9,7 @@ class CustomerController extends Controller
 {
     
     public function index(){
-        $customers = Customer::all();
+        $customers = Customer::orderby('name','asc')->get();
         return view('customers.index', compact('customers'));
     }
 

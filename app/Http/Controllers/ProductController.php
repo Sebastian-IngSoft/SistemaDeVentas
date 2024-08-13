@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index(){
-        $products = Product::where('visibility','1')->get();
+        $products = Product::where('visibility','1')->orderby('name','asc')->get();
         return view('products.index', compact('products'));
     }
 

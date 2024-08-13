@@ -14,7 +14,7 @@ class Debt extends Model
     public function ticket(){
         return $this->belongsTo(Ticket::class);
     }
-    public function users(){
-        return $this->belongsToMany(User::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

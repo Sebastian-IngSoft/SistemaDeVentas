@@ -16,8 +16,8 @@ class TicketController extends Controller
     public function index()
     {   
         // Vista para crear la venta
-        $customers = Customer::all();
-        $products = Product::where('visibility', 1)->get();
+        $customers = Customer::orderby('name','asc')->get();
+        $products = Product::where('visibility', 1)->orderby('name','asc')->get();
         return view('tickets.index', compact('customers', 'products'));
     }
 
@@ -57,6 +57,20 @@ class TicketController extends Controller
 
     public function show(Ticket $ticket){//muestra el ticket seleccionado
         $sales = Sale::where('ticket_id',$ticket->id)->get();
-        return view('tickets.show',compact('ticket','sales'));
+        $debt = Debt::where('ticket_id',$ticket->id)->first();
+        return view('tickets.show',compact('ticket','sales','debt'));
+    }
+
+    public function payment(Request $request, Ticket $ticket){ //actualiza los campos discount y total para completar el ticket
+        $ticket->update([
+            'discount' => $request->discount,
+            'total' => ($ticket->price - $request->discount),
+        ]);
+        $ticket->debt->update([ // actuliza la tabla debt como pagada y registra que vendedor pago la deuda
+            'cancel' => 1,
+            'user_id' => Auth::id()
+        ]);
+        return redirect()->route('ticket.showtickets');
+
     }
 }
