@@ -1,3 +1,4 @@
+
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 
@@ -8,9 +9,9 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/js/bootstrap.bundle.min.js',
-                'resources/js/bootstrap.bundle.min.js.map'
             ],
             refresh: true,
         }),
     ],
 });
+

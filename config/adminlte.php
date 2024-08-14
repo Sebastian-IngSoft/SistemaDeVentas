@@ -138,7 +138,7 @@ return [
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
     'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_profile_url' => true,//estaba como false
 
     /*
     |--------------------------------------------------------------------------
@@ -263,7 +263,7 @@ return [
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
-    'profile_url' => false,
+    'profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -490,12 +490,12 @@ return [
             ],
         ],
         'Chartjs' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js',
+                    'location' => '//cdn.jsdelivr.net/npm/chart.js',
                 ],
             ],
         ],

@@ -46,15 +46,29 @@ class User extends Authenticatable
         ];
     }
 
-    public function tickets(){
+
+
+    //RELACIONES
+
+    public function tickets()
+    {
         return $this->hasMany(Ticket::class);
     }
-    public function debts(){
+    public function debts()
+    {
         return $this->hasMany(Debt::class);
     }
 
     //relacion polimorfica
-    public function wallet(){
-        return $this->morphOne(Wallet::class,'walletable');
+    public function wallet()
+    {
+        return $this->morphOne(Wallet::class, 'walletable');
+    }
+
+
+    //CONFIGURACION ADMINLTE
+    public function adminlte_profile_url()
+    {
+        return route('profile.edit');
     }
 }
