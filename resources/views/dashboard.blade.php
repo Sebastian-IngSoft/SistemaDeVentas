@@ -10,6 +10,9 @@
         <div class="col-md-6 card">
             <canvas id="vistaSales"></canvas>
         </div>
+        <div class="col-md-6 card">
+            <canvas id="profitChart"></canvas>
+        </div>
     </div>
 @stop
 
@@ -23,10 +26,8 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             if (typeof Chart !== 'undefined') {
-                console.log('Chart.js loaded:', Chart);
-
+                // Primer gráfico: Productos más comprados
                 var ctx = document.getElementById('vistaSales').getContext('2d');
-
                 var productNames = @json($boardSale->pluck('product.name'));
                 var productAmounts = @json($boardSale->pluck('total_amount'));
 
@@ -65,6 +66,37 @@
                             title: {
                                 display: true,
                                 text: 'Productos más comprados en el mes'
+                            }
+                        }
+                    }
+                });
+
+                // Segundo gráfico: Ganancia bruta y neta
+                var profitCtx = document.getElementById('profitChart').getContext('2d');
+
+                var profitChart = new Chart(profitCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Ganancia Bruta', 'Ganancia Neta'],
+                        datasets: [{
+                            label: 'Ganancia en el Mes',
+                            data: [{{ $totalGrossProfit }}, {{ $totalNetProfit }}],
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
                             }
                         }
                     }

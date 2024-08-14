@@ -1,16 +1,16 @@
 <?php
-
 namespace App\Http\Controllers\Graficos;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sale;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class VistaController extends Controller
 {
     public function index(){
-        // Obtener la fecha del primer día del mes y la fecha actual
+        // Fechas del mes actual
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
 
@@ -21,7 +21,21 @@ class VistaController extends Controller
             ->orderBy('total_amount', 'desc')
             ->get();
 
-        return view('dashboard', compact('boardSale'));
+        // Calcular la ganancia bruta y neta
+        $totalGrossProfit = 0;
+        $totalNetProfit = 0;
+
+        foreach ($boardSale as $sale) {
+            $product = Product::find($sale->product_id);
+            $grossProfit = $sale->total_amount * $product->sell;
+            $netProfit = $grossProfit - ($sale->total_amount * $product->purchase);
+
+            $totalGrossProfit += $grossProfit;
+            $totalNetProfit += $netProfit;
+        }
+
+        return view('dashboard', compact('boardSale', 'totalGrossProfit', 'totalNetProfit'));
     }
 }
+
 

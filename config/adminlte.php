@@ -324,6 +324,7 @@ return [
             'label_color' => 'success',
         ],
         */
+
         ['header' => 'Operaciones'],
         [
             'text' => 'Productos',
@@ -417,6 +418,13 @@ return [
             'url' => '#',
         ],
         */
+        ['header' => 'Configuraciones'],
+        [
+            'text' => 'Nuevo usuario',
+            'route' => 'register',
+            'icon' => 'fas fa-user-plus',
+        ],
+
     ],
 
     /*
