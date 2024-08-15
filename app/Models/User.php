@@ -8,9 +8,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use PhpParser\Node\Expr\FuncCall;
 
+//spatie
+use Spatie\Permission\Traits\HasRoles;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    use HasRoles;//spatie
 
     /**
      * The attributes that are mass assignable.

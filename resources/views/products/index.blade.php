@@ -63,7 +63,11 @@
                 <th scope="col">Stock</th>
                 <th scope="col">Compra</th>
                 <th scope="col">Venta</th>
+                @can('products.update')
+
                 <th scope="col">Operaciones</th>
+                @endcan
+
             </tr>
         </thead>
         <tbody>
@@ -74,16 +78,19 @@
                     <td>{{ $item_products->stock }}</td>
                     <td>S/ {{ $item_products->purchase }}</td>
                     <td>S/ {{ $item_products->sell }}</td>
-                    <td>
-                        <button type="button" class="btn btn-warning mb-3" data-bs-toggle="modal"
-                            data-bs-target="#ModalEditar{{ $item_products->id }}">
-                            <i class="fas fa-pen-nib"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger mb-3" data-bs-toggle="modal"
-                            data-bs-target="#ModalEliminar{{ $item_products->id }}">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </td>
+                    @can('products.update')
+                        <td>
+                            <button type="button" class="btn btn-warning mb-3" data-bs-toggle="modal"
+                                data-bs-target="#ModalEditar{{ $item_products->id }}">
+                                <i class="fas fa-pen-nib"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger mb-3" data-bs-toggle="modal"
+                                data-bs-target="#ModalEliminar{{ $item_products->id }}">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    @endcan
+
                 </tr>
 
                 <!-- Modal editar-->
@@ -113,7 +120,7 @@
                                         aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
                                         onkeypress="validarNumero(event)" oninput="validarNumeroOnInput(this)"
                                         value="{{ $item_products->stock }}" required>
-                                    
+
                                     <label for="">Precio de Compra</label>
                                     <input type="number" name="purchase" step="any" class="form-control"
                                         onkeypress="validarNumero(event)" oninput="validarNumeroOnInput(this)"

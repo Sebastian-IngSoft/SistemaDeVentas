@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Sale;
 use App\Models\Ticket;
 use App\Models\User;
+use App\Models\Wallet;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,14 +20,29 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // 
+        
+        //creando roles
+        $this->call(RoleSeeder::class);
 
-        User::factory()->create([
+        User::create([
             'name' => 'ventas',
             'email' => 'ventas@ventas.com',
             'password' => 'ventas22'
+        ])->assignRole('admin');
+        
+        Wallet::create([
+            'balance' => 0,
+            'flow' => 0,
+            'walletable_type' => 'App\Models\User',
+            'walletable_id' => 1
         ]);
-        //Factories creados
-        User::factory(9)->create();
+        
+        //Factories
+        User::factory(9)->create()->each(function ($user) {
+            $user->assignRole('seller');
+        });
+        
+        
         Product::factory(50)->create();
         Customer::factory(20)->create();
         Ticket::factory(50)->create();

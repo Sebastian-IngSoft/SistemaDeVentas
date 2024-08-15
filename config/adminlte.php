@@ -418,11 +418,15 @@ return [
             'url' => '#',
         ],
         */
-        ['header' => 'Configuraciones'],
+        [   'header' => 'Configuraciones',
+            'can' => 'register'
+        ],
         [
             'text' => 'Nuevo usuario',
             'route' => 'register',
             'icon' => 'fas fa-user-plus',
+            'can' => 'register'
+
         ],
 
     ],

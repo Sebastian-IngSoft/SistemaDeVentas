@@ -46,7 +46,25 @@
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
-
+        <div>
+            <x-input-label for="role" :value="__('Asignar Rol')" />
+            
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="role" value="admin" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Administrador
+                </label>
+            </div>
+            
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="role" value="seller" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Vendedor
+                </label>
+            </div>
+        </div>
+        
+        
         <div class="flex items-center justify-end mt-4">
             {{--
             <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
@@ -63,8 +81,6 @@
 @stop
 
 @section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 
 @section('js')
