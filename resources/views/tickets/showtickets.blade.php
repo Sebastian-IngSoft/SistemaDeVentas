@@ -23,7 +23,7 @@
             @foreach ($tickets as $ticket)
                 <tr>
                     <th scope="row">{{ $ticket->id }}</th>
-                    <td>{{ $ticket->user->name }}</td>
+                    <td>{{ $ticket->user->name?? 'Usuario retirado' }}</td>
                     <td>{{ $ticket->customer->name ?? 'Cliente casual no registrado' }}</td>
                     <td>{{ $ticket->created_at }}</td>
                     <td>{{ $ticket->price }}</td>

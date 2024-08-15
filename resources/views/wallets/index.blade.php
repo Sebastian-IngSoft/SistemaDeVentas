@@ -112,7 +112,7 @@
                     <td>
                         {{--Logica para campo MOTIVO--}}
                         @if ($wallet->walletable_type == 'App\Models\User'){{--que hacer cuando es usuario--}}
-                            Operación de usuario {{ $wallet->walletable->name }}
+                            Operación de usuario {{ $wallet->walletable->name?? 'retirado' }}
                         @elseif ($wallet->walletable_type == 'App\Models\Ticket'){{--que hacer cuando es boleta--}}
                             <a href="{{ route('ticket.show', $wallet->walletable->id) }}" class="text-dark">
                                 Boleta #{{ $wallet->walletable->id }} <i class="far fa-share-square"></i>

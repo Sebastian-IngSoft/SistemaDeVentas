@@ -428,6 +428,13 @@ return [
             'can' => 'register'
 
         ],
+        [
+            'text' => 'Usuarios registrados',
+            'route' => 'user.index',
+            'icon' => 'fas fa-users',
+            'can' => 'register'
+
+        ],
 
     ],
 

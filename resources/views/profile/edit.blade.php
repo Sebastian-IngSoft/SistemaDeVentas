@@ -2,7 +2,7 @@
 
 @extends('adminlte::page')
 
-@section('title', 'Sales-SarSoft')
+@section('title', 'Configuracion')
 
 @section('content_header')
 

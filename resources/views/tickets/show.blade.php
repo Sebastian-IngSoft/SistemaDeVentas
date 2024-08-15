@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <th colspan="1" class="bg-secondary">Nombre</th>
-                    <td colspan="5">{{ $ticket->user->name }}</td>
+                    <td colspan="5">{{ $ticket->user->name ?? 'usuario retirado' }}</td>
                 </tr>
                 <tr>
                     <th colspan="6" class="text-center bg-secondary">COMPRA REALIZADA</th>
@@ -178,7 +178,7 @@
 
                     <tr>
                         <th colspan="1" class="bg-success">Nombre</th>
-                        <td colspan="5" class="">{{ $debt->user->name }}</td>
+                        <td colspan="5" class="">{{ $debt->user->name ?? 'usuario retirado'}}</td>
 
 
                     </tr>
@@ -207,7 +207,7 @@
 
                     <tr>
                         <th colspan="1" class="bg-danger">Nombre</th>
-                        <td colspan="5" class="">{{ $debt->user->name }}</td>
+                        <td colspan="5" class="">{{ $debt->user->name ?? 'usuario retirado'}}</td>
 
 
                     </tr>

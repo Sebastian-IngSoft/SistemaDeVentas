@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WalletController;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +56,14 @@ Route::controller(WalletController::class)->group(function(){
     Route::get('/wallet/index','index')->name('wallet.index')->middleware(['auth', 'verified']);
     Route::post('/wallet/deposit','deposit')->name('wallet.deposit')->middleware(['auth', 'verified']);
     Route::post('/wallet/withdraw','withdraw')->name('wallet.withdraw')->middleware(['auth', 'verified']);
+});
+
+//Configuraciones
+Route::middleware('auth')->group(function(){
+    Route::controller(UserController::class)->group(function(){
+        Route::get('user/index','index')->name('user.index');
+        Route::delete('user/destroy/{user}','destroy')->name('user.destroy');
+    });
 });
 
 
